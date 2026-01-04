@@ -19,7 +19,7 @@ padding: 20px;
 }
 
 .container {
-max-width: 0 auto;
+max-width: 100%;
 margin: 0 auto;
 }
 
@@ -56,12 +56,18 @@ display: none;
 width: 100%;
 height: 300px;
 background-color: #f0f0f0;
-border-bottom: 3px solid #034705;
+border-bottom: 3px solid #15b3d7;
 display: flex;
 align-items: center;
 justify-content: center;
 position: relative;
 transition: height 0.3s ease;
+}
+
+.image-container img {
+width: 100%;
+height: 100%;
+object-fit: cover;
 }
 
 /* Hide all images by default */
@@ -71,6 +77,9 @@ width: 100%;
 height: 100%;
 align-items: center;
 justify-content: center;
+position: absolute;
+top: 0;
+left: 0;
 }
 
 /* Show image when corresponding radio is checked */
@@ -78,48 +87,82 @@ input[type="radio"]:checked + .image-slide {
 display: flex;
 }
 
+/* Item expansion - works for all grid items */
 .map-container {
 height: 300px;
 transition: height 0.3s ease;
 }
 
-/* Map expansion */
+#expand-toggle-1:checked ~ .container .grid .expand-item-1,
+#expand-toggle-2:checked ~ .container .grid .expand-item-2,
+#expand-toggle-3:checked ~ .container .grid .expand-item-3,
 #map-toggle:checked ~ .container .grid .map-item {
 grid-column: span 2;
 grid-row: span 2;
 }
 
+#expand-toggle-1:checked ~ .container .grid .expand-item-1 .image-container,
+#expand-toggle-2:checked ~ .container .grid .expand-item-2 .image-container,
+#expand-toggle-3:checked ~ .container .grid .expand-item-3 .image-container,
 #map-toggle:checked ~ .container .grid .map-item .map-container {
 height: 100%;
 min-height: 600px;
 }
 
+#expand-toggle-1:checked ~ .container .grid .expand-item-1 .expand-indicator,
+#expand-toggle-2:checked ~ .container .grid .expand-item-2 .expand-indicator,
+#expand-toggle-3:checked ~ .container .grid .expand-item-3 .expand-indicator,
 #map-toggle:checked ~ .container .grid .map-item .expand-indicator {
 display: none;
 }
 
+#expand-toggle-1:checked ~ .container .grid .expand-item-1 .collapse-indicator,
+#expand-toggle-2:checked ~ .container .grid .expand-item-2 .collapse-indicator,
+#expand-toggle-3:checked ~ .container .grid .expand-item-3 .collapse-indicator,
 #map-toggle:checked ~ .container .grid .map-item .collapse-indicator {
 display: block;
 }
 
 .caption-overlay {
 position: absolute;
-bottom: 0;
-left: 0;
+top: 0;
 right: 0;
-background-color: rgba(0, 0, 0, 0.85);
+background-color: rgba(0, 0, 0, 0.95);
 color: #23fd0b;
-padding: 15px;
-transform: translateY(100%);
-transition: transform 0.3s ease;
-text-align: center;
+padding: 20px;
+transform: translateX(100%);
+transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease;
 font-size: 0.9em;
 font-family:'Times New Roman', Times, serif;
-line-height: 1.4;
+line-height: 1.6;
+z-index: 5;
+width: 250px;
+height: 100%;
+border-left: 3px solid #23fd0b;
+box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+overflow-y: auto;
+}
+
+.caption-overlay pre {
+font-family: 'Courier New', monospace;
+font-size: 0.85em;
+white-space: pre-wrap;
+word-wrap: break-word;
 }
 
 .grid-item:hover .caption-overlay {
-transform: translateY(0);
+transform: translateX(0);
+}
+
+/* Expanded caption size */
+#expand-toggle-1:checked ~ .container .grid .expand-item-1 .caption-overlay,
+#expand-toggle-2:checked ~ .container .grid .expand-item-2 .caption-overlay,
+#expand-toggle-3:checked ~ .container .grid .expand-item-3 .caption-overlay,
+#map-toggle:checked ~ .container .grid .map-item .caption-overlay {
+width: 500px;
+height: 100%;
+font-size: 1.1em;
+padding: 30px;
 }
 
 .image-counter {
@@ -131,7 +174,8 @@ color: #fff;
 padding: 5px 10px;
 font-size: 0.8em;
 border-radius: 3px;
-font-family:cursive;
+font-family: cursive;
+z-index: 10;
 }
 
 .expand-indicator,
@@ -145,13 +189,14 @@ padding: 5px 10px;
 font-size: 0.8em;
 border-radius: 3px;
 cursor: pointer;
+z-index: 10;
 }
 
 .collapse-indicator {
 display: none;
 }
 
-/* Navigation dots */
+/* Navigation dots for carousel */
 .nav-dots {
 position: absolute;
 bottom: 10px;
@@ -172,14 +217,38 @@ transition: background-color 0.3s;
 }
 
 .nav-dots label:hover {
-background-color: rgba(138, 0, 0, 0.8);
+background-color: rgba(255, 255, 255, 0.8);
 }
 
-input[type="radio"]:checked ~ .nav-dots label[for] {
-background-color: rgba(255, 255, 255, 0.5);
+/* Season labels for seasonal switching */
+.season-labels {
+position: absolute;
+bottom: 10px;
+left: 50%;
+transform: translateX(-50%);
+display: flex;
+gap: 5px;
+z-index: 10;
+background-color: rgba(0, 0, 0, 0.7);
+padding: 5px;
+border-radius: 5px;
 }
 
-/* Active dot highlighting - specific for each collection */
+.season-label {
+cursor: pointer;
+padding: 5px 10px;
+background-color: rgba(255, 255, 255, 0.2);
+color: #fff;
+font-size: 0.75em;
+border-radius: 3px;
+transition: background-color 0.3s ease;
+}
+
+.season-label:hover {
+background-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Active dot highlighting for carousel items */
 #img1-1:checked ~ .nav-dots label[for="img1-1"],
 #img1-2:checked ~ .nav-dots label[for="img1-2"],
 #img1-3:checked ~ .nav-dots label[for="img1-3"],
@@ -188,30 +257,17 @@ background-color: rgba(255, 255, 255, 0.5);
 #img2-3:checked ~ .nav-dots label[for="img2-3"],
 #img2-4:checked ~ .nav-dots label[for="img2-4"],
 #img3-1:checked ~ .nav-dots label[for="img3-1"],
-#img3-2:checked ~ .nav-dots label[for="img3-2"],
-#img5-1:checked ~ .nav-dots label[for="img5-1"],
-#img5-2:checked ~ .nav-dots label[for="img5-2"],
-#img5-3:checked ~ .nav-dots label[for="img5-3"],
-#img5-4:checked ~ .nav-dots label[for="img5-4"],
-#img5-5:checked ~ .nav-dots label[for="img5-5"],
-#img5-6:checked ~ .nav-dots label[for="img5-6"],
-#img5-7:checked ~ .nav-dots label[for="img5-7"],
-#img5-8:checked ~ .nav-dots label[for="img5-8"],
-#img5-9:checked ~ .nav-dots label[for="img5-9"],
-#img5-10:checked ~ .nav-dots label[for="img5-10"],
-#img6-1:checked ~ .nav-dots label[for="img6-1"],
-#img6-2:checked ~ .nav-dots label[for="img6-2"],
-#img6-3:checked ~ .nav-dots label[for="img6-3"],
-#img7-1:checked ~ .nav-dots label[for="img7-1"],
-#img7-2:checked ~ .nav-dots label[for="img7-2"],
-#img8-1:checked ~ .nav-dots label[for="img8-1"],
-#img8-2:checked ~ .nav-dots label[for="img8-2"],
-#img8-3:checked ~ .nav-dots label[for="img8-3"],
-#img8-4:checked ~ .nav-dots label[for="img8-4"],
-#img9-1:checked ~ .nav-dots label[for="img9-1"],
-#img9-2:checked ~ .nav-dots label[for="img9-2"],
-#img9-3:checked ~ .nav-dots label[for="img9-3"] {
+#img3-2:checked ~ .nav-dots label[for="img3-2"] {
 background-color: #fff;
+}
+
+/* Active season label highlighting */
+#loc1-spring:checked ~ .season-labels label[for="loc1-spring"],
+#loc1-summer:checked ~ .season-labels label[for="loc1-summer"],
+#loc1-fall:checked ~ .season-labels label[for="loc1-fall"],
+#loc1-winter:checked ~ .season-labels label[for="loc1-winter"] {
+background-color: #23fd0b;
+color: #000;
 }
 
 @media (max-width: 768px) {
@@ -228,60 +284,174 @@ grid-template-columns: 1fr;
 </style>
 </head>
 <body>
+<input type="checkbox" id="expand-toggle-1">
+<input type="checkbox" id="expand-toggle-2">
+<input type="checkbox" id="expand-toggle-3">
 <input type="checkbox" id="map-toggle">
 <div class="container">
 <h1>Trash Tracker</h1>
 <div class="grid">
-<!-- Collection 1 -->
-<div class="grid-item">
+
+<!-- Carousel Collection 1 (3 images) -->
+<div class="grid-item expand-item-1">
 <div class="image-container">
 <input type="radio" name="collection1" id="img1-1" checked>
 <div class="image-slide">
-<span>[Image 1]</span>
+<img src="assets/images/location_1/L1_1811.jpg" alt="Collection 1 Image 1">
 <span class="image-counter">1/3</span>
 </div>
 <input type="radio" name="collection1" id="img1-2">
 <div class="image-slide">
-<span>[Image 2]</span>
+<img src="assets/images/location_1/L1_0612.jpg" alt="Collection 1 Image 2">
 <span class="image-counter">2/3</span>
 </div>
 <input type="radio" name="collection1" id="img1-3">
 <div class="image-slide">
-<span>[Image 3]</span>
+<img src="assets/images/location_1/L1_0312.jpg" alt="Collection 1 Image 3">
 <span class="image-counter">3/3</span>
 </div>
+<label for="expand-toggle-1" class="expand-indicator">▢ Expand</label>
+<label for="expand-toggle-1" class="collapse-indicator">▣ Collapse</label>
 <div class="nav-dots">
 <label for="img1-1"></label>
 <label for="img1-2"></label>
 <label for="img1-3"></label>
 </div>
 </div>
-<div class="caption-overlay">Caption for the first image in this collection</div>
+<div class="caption-overlay"><pre>
+File name: IMG_5275.HEIC
+File type: HEIF image
+File size: 2.9 MB
+
+Created: 31 December 2025, 18:37
+Modified: 31 December 2025, 18:37
+Last opened: 31 December 2025, 18:39
+Content created: 18 November 2025, 11:34
+
+Dimensions: 4032 x 3024
+Resolution: 72 x 72
+Colour space: RGB
+Colour profile: Display P3
+
+Device make: Apple
+Device model: iPhone 13
+
+Aperture: f/2.4
+Exposure time: 1/99
+ISO: 32
+Focal length: 1.54 mm
+Flash: No
+
+Exposure program: Normal
+Metering mode: Pattern
+White balance: Auto
+
+Content creator: 18.6.2
+
+Latitude: 52° 31' 45.95" N
+Longitude: 4° 17' 2.112" E
+
+------------------------------------
+
+File name: IMG_5699.HEIC
+File type: HEIF image
+File size: 2.8 MB
+
+Created: 2 December 2025, 13:34
+Modified: 2 December 2025, 13:34
+Last opened: —
+Content created: 25 December 2025, 17:25
+
+Dimensions: 4032 x 3024
+Resolution: 72 x 72
+Colour space: RGB
+Colour profile: Display P3
+
+Device make: Apple
+Device model: iPhone 13
+
+Aperture value: 1.3561
+F number: f/1.6
+Exposure time: 1/218
+ISO: 40
+Focal length: 5.1 mm
+Flash: No
+
+Exposure program: Normal
+Metering mode: Spot
+White balance: Auto
+
+Content creator: 18.6.2
+
+Latitude: 52° 31' 46.21" N
+Longitude: 4° 17' 2.358" E
+
+------------------------------------
+
+File name: IMG_5925.HEIC
+File type: HEIF image
+File size: 1.2 MB
+
+Created: Saturday, 6 December 2025, 23:59
+Modified: Saturday, 6 December 2025, 23:59
+Last opened: 25 December 2025, 17:49
+Content created: 6 December 2025, 23:59
+
+Dimensions: 4032 x 3024
+Resolution: 72 x 72
+Colour space: RGB
+Colour profile: Display P3
+
+Device make: Apple
+Device model: iPhone 13
+
+Aperture value: 2.5261
+F number: f/2.4
+Exposure time: 1/4
+ISO: 1600
+Focal length: 1.54 mm
+Flash: No
+
+Exposure program: Normal
+Metering mode: Pattern
+White balance: Auto
+
+Content creator: 18.6.2
+
+Latitude: 52° 3' 46.26" N
+Longitude: 4° 17' 1.38" E
+
+
+
+
+</pre></div>
 </div>
 
-<!-- Collection 2 -->
-<div class="grid-item">
+<!-- Carousel Collection 2 (4 images) -->
+<div class="grid-item expand-item-2">
 <div class="image-container">
 <input type="radio" name="collection2" id="img2-1" checked>
 <div class="image-slide">
-<span>[Image 1]</span>
+<img src="https://via.placeholder.com/400x300/FF6B6B/FFFFFF?text=Collection+2+Image+1" alt="Collection 2 Image 1">
 <span class="image-counter">1/4</span>
 </div>
 <input type="radio" name="collection2" id="img2-2">
 <div class="image-slide">
-<span>[Image 2]</span>
+<img src="https://via.placeholder.com/400x300/4ECDC4/FFFFFF?text=Collection+2+Image+2" alt="Collection 2 Image 2">
 <span class="image-counter">2/4</span>
 </div>
 <input type="radio" name="collection2" id="img2-3">
 <div class="image-slide">
-<span>[Image 3]</span>
+<img src="https://via.placeholder.com/400x300/FFE66D/FFFFFF?text=Collection+2+Image+3" alt="Collection 2 Image 3">
 <span class="image-counter">3/4</span>
 </div>
 <input type="radio" name="collection2" id="img2-4">
 <div class="image-slide">
-<span>[Image 4]</span>
+<img src="https://via.placeholder.com/400x300/95E1D3/FFFFFF?text=Collection+2+Image+4" alt="Collection 2 Image 4">
 <span class="image-counter">4/4</span>
 </div>
+<label for="expand-toggle-2" class="expand-indicator">▢ Expand</label>
+<label for="expand-toggle-2" class="collapse-indicator">▣ Collapse</label>
 <div class="nav-dots">
 <label for="img2-1"></label>
 <label for="img2-2"></label>
@@ -289,216 +459,42 @@ grid-template-columns: 1fr;
 <label for="img2-4"></label>
 </div>
 </div>
-<div class="caption-overlay">Caption for the first image in collection 2</div>
+<div class="caption-overlay">Caption for Collection 2</div>
 </div>
 
-<!-- Collection 3 -->
-<div class="grid-item">
+<!-- Carousel Collection 3 (2 images) -->
+<div class="grid-item expand-item-3">
 <div class="image-container">
 <input type="radio" name="collection3" id="img3-1" checked>
 <div class="image-slide">
-<span>[Image 1]</span>
+<img src="https://via.placeholder.com/400x300/FF6B6B/FFFFFF?text=Collection+3+Image+1" alt="Collection 3 Image 1">
 <span class="image-counter">1/2</span>
 </div>
 <input type="radio" name="collection3" id="img3-2">
 <div class="image-slide">
-<span>[Image 2]</span>
+<img src="https://via.placeholder.com/400x300/4ECDC4/FFFFFF?text=Collection+3+Image+2" alt="Collection 3 Image 2">
 <span class="image-counter">2/2</span>
 </div>
+<label for="expand-toggle-3" class="expand-indicator">▢ Expand</label>
+<label for="expand-toggle-3" class="collapse-indicator">▣ Collapse</label>
 <div class="nav-dots">
 <label for="img3-1"></label>
 <label for="img3-2"></label>
 </div>
 </div>
-<div class="caption-overlay">Caption for the first image in collection 3</div>
+<div class="caption-overlay">Caption for Collection 3</div>
 </div>
 
-<!-- Map Item -->
+<!-- Map Item (Expandable) -->
 <div class="grid-item map-item">
 <div class="image-container map-container">
-<span>[Map]</span>
-<label for="map-toggle" class="expand-indicator">Click to expand</label>
-<label for="map-toggle" class="collapse-indicator">Click to collapse</label>
+<img src="https://via.placeholder.com/400x300/95A5A6/FFFFFF?text=Map+View" alt="Map">
+<label for="map-toggle" class="expand-indicator">▢ Expand</label>
+<label for="map-toggle" class="collapse-indicator">▣ Collapse</label>
 </div>
-<div class="caption-overlay">Map location description</div>
-</div>
-
-<!-- Collection 5 (10 images) -->
-<div class="grid-item">
-<div class="image-container">
-<input type="radio" name="collection5" id="img5-1" checked>
-<div class="image-slide">
-<span>[Image 1]</span>
-<span class="image-counter">1/10</span>
-</div>
-<input type="radio" name="collection5" id="img5-2">
-<div class="image-slide">
-<span>[Image 2]</span>
-<span class="image-counter">2/10</span>
-</div>
-<input type="radio" name="collection5" id="img5-3">
-<div class="image-slide">
-<span>[Image 3]</span>
-<span class="image-counter">3/10</span>
-</div>
-<input type="radio" name="collection5" id="img5-4">
-<div class="image-slide">
-<span>[Image 4]</span>
-<span class="image-counter">4/10</span>
-</div>
-<input type="radio" name="collection5" id="img5-5">
-<div class="image-slide">
-<span>[Image 5]</span>
-<span class="image-counter">5/10</span>
-</div>
-<input type="radio" name="collection5" id="img5-6">
-<div class="image-slide">
-<span>[Image 6]</span>
-<span class="image-counter">6/10</span>
-</div>
-<input type="radio" name="collection5" id="img5-7">
-<div class="image-slide">
-<span>[Image 7]</span>
-<span class="image-counter">7/10</span>
-</div>
-<input type="radio" name="collection5" id="img5-8">
-<div class="image-slide">
-<span>[Image 8]</span>
-<span class="image-counter">8/10</span>
-</div>
-<input type="radio" name="collection5" id="img5-9">
-<div class="image-slide">
-<span>[Image 9]</span>
-<span class="image-counter">9/10</span>
-</div>
-<input type="radio" name="collection5" id="img5-10">
-<div class="image-slide">
-<span>[Image 10]</span>
-<span class="image-counter">10/10</span>
-</div>
-<div class="nav-dots">
-<label for="img5-1"></label>
-<label for="img5-2"></label>
-<label for="img5-3"></label>
-<label for="img5-4"></label>
-<label for="img5-5"></label>
-<label for="img5-6"></label>
-<label for="img5-7"></label>
-<label for="img5-8"></label>
-<label for="img5-9"></label>
-<label for="img5-10"></label>
-</div>
-</div>
-<div class="caption-overlay">Caption for the first image in collection 10</div>
+<div class="caption-overlay">Map location - Click to expand for larger view</div>
 </div>
 
-<!-- Collection 6 -->
-<div class="grid-item">
-<div class="image-container">
-<input type="radio" name="collection6" id="img6-1" checked>
-<div class="image-slide">
-<span>[Image 1]</span>
-<span class="image-counter">1/3</span>
-</div>
-<input type="radio" name="collection6" id="img6-2">
-<div class="image-slide">
-<span>[Image 2]</span>
-<span class="image-counter">2/3</span>
-</div>
-<input type="radio" name="collection6" id="img6-3">
-<div class="image-slide">
-<span>[Image 3]</span>
-<span class="image-counter">3/3</span>
-</div>
-<div class="nav-dots">
-<label for="img6-1"></label>
-<label for="img6-2"></label>
-<label for="img6-3"></label>
-</div>
-</div>
-<div class="caption-overlay">Caption for the first image in collection 6</div>
-</div>
-
-<!-- Collection 7 -->
-<div class="grid-item">
-<div class="image-container">
-<input type="radio" name="collection7" id="img7-1" checked>
-<div class="image-slide">
-<span>[Image 1]</span>
-<span class="image-counter">1/2</span>
-</div>
-<input type="radio" name="collection7" id="img7-2">
-<div class="image-slide">
-<span>[Image 2]</span>
-<span class="image-counter">2/2</span>
-</div>
-<div class="nav-dots">
-<label for="img7-1"></label>
-<label for="img7-2"></label>
-</div>
-</div>
-<div class="caption-overlay">Caption for the first image in collection 7</div>
-</div>
-
-<!-- Collection 8 -->
-<div class="grid-item">
-<div class="image-container">
-<input type="radio" name="collection8" id="img8-1" checked>
-<div class="image-slide">
-<span>[Image 1]</span>
-<span class="image-counter">1/4</span>
-</div>
-<input type="radio" name="collection8" id="img8-2">
-<div class="image-slide">
-<span>[Image 2]</span>
-<span class="image-counter">2/4</span>
-</div>
-<input type="radio" name="collection8" id="img8-3">
-<div class="image-slide">
-<span>[Image 3]</span>
-<span class="image-counter">3/4</span>
-</div>
-<input type="radio" name="collection8" id="img8-4">
-<div class="image-slide">
-<span>[Image 4]</span>
-<span class="image-counter">4/4</span>
-</div>
-<div class="nav-dots">
-<label for="img8-1"></label>
-<label for="img8-2"></label>
-<label for="img8-3"></label>
-<label for="img8-4"></label>
-</div>
-</div>
-<div class="caption-overlay">Caption for the first image in collection 8</div>
-</div>
-
-<!-- Collection 9 -->
-<div class="grid-item">
-<div class="image-container">
-<input type="radio" name="collection9" id="img9-1" checked>
-<div class="image-slide">
-<span>[Image 1]</span>
-<span class="image-counter">1/3</span>
-</div>
-<input type="radio" name="collection9" id="img9-2">
-<div class="image-slide">
-<span>[Image 2]</span>
-<span class="image-counter">2/3</span>
-</div>
-<input type="radio" name="collection9" id="img9-3">
-<div class="image-slide">
-<span>[Image 3]</span>
-<span class="image-counter">3/3</span>
-</div>
-<div class="nav-dots">
-<label for="img9-1"></label>
-<label for="img9-2"></label>
-<label for="img9-3"></label>
-</div>
-</div>
-<div class="caption-overlay">Caption for the first image in collection 9</div>
-</div>
 </div>
 </div>
 </body>
