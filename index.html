@@ -159,10 +159,10 @@ transform: translateX(0);
 #expand-toggle-2:checked ~ .container .grid .expand-item-2 .caption-overlay,
 #expand-toggle-3:checked ~ .container .grid .expand-item-3 .caption-overlay,
 #map-toggle:checked ~ .container .grid .map-item .caption-overlay {
-width: 500px;
+width: 200px;
 height: 100%;
-font-size: 1.1em;
-padding: 30px;
+font-size: 1em;
+padding: 10px;
 }
 
 .image-counter {
@@ -187,6 +187,7 @@ background-color: rgba(0, 0, 0, 0.7);
 color: #fff;
 padding: 5px 10px;
 font-size: 0.8em;
+font-family: cursive;
 border-radius: 3px;
 cursor: pointer;
 z-index: 10;
@@ -257,7 +258,9 @@ background-color: rgba(255, 255, 255, 0.4);
 #img2-3:checked ~ .nav-dots label[for="img2-3"],
 #img2-4:checked ~ .nav-dots label[for="img2-4"],
 #img3-1:checked ~ .nav-dots label[for="img3-1"],
-#img3-2:checked ~ .nav-dots label[for="img3-2"] {
+#img3-2:checked ~ .nav-dots label[for="img3-2"],
+#img3-3:checked ~ .nav-dots label[for="img3-3"]
+{
 background-color: #fff;
 }
 
@@ -318,7 +321,8 @@ grid-template-columns: 1fr;
 <label for="img1-3"></label>
 </div>
 </div>
-<div class="caption-overlay"><pre>
+<div class="caption-overlay">
+<pre>
 File name: IMG_5275.HEIC
 File type: HEIF image
 File size: 2.9 MB
@@ -420,11 +424,11 @@ Content creator: 18.6.2
 
 Latitude: 52° 3' 46.26" N
 Longitude: 4° 17' 1.38" E
+</pre>
 
 
 
-
-</pre></div>
+</div>
 </div>
 
 <!-- Carousel Collection 2 (4 images) -->
@@ -432,26 +436,26 @@ Longitude: 4° 17' 1.38" E
 <div class="image-container">
 <input type="radio" name="collection2" id="img2-1" checked>
 <div class="image-slide">
-<img src="https://via.placeholder.com/400x300/FF6B6B/FFFFFF?text=Collection+2+Image+1" alt="Collection 2 Image 1">
+<img src="assets/images/location_2/L2_1811.jpg" alt="Collection 2 Image 1">
 <span class="image-counter">1/4</span>
 </div>
 <input type="radio" name="collection2" id="img2-2">
 <div class="image-slide">
-<img src="https://via.placeholder.com/400x300/4ECDC4/FFFFFF?text=Collection+2+Image+2" alt="Collection 2 Image 2">
+<img src="assets/images/location_2/L2_2311.jpg" alt="Collection 2 Image 2">
 <span class="image-counter">2/4</span>
 </div>
 <input type="radio" name="collection2" id="img2-3">
 <div class="image-slide">
-<img src="https://via.placeholder.com/400x300/FFE66D/FFFFFF?text=Collection+2+Image+3" alt="Collection 2 Image 3">
+<img src="assets/images/location_2/L2_2411.jpg" alt="Collection 2 Image 3">
 <span class="image-counter">3/4</span>
 </div>
 <input type="radio" name="collection2" id="img2-4">
 <div class="image-slide">
-<img src="https://via.placeholder.com/400x300/95E1D3/FFFFFF?text=Collection+2+Image+4" alt="Collection 2 Image 4">
+<img src="assets/images/location_2/L2_2711.jpg" alt="Collection 2 Image 4">
 <span class="image-counter">4/4</span>
 </div>
-<label for="expand-toggle-2" class="expand-indicator">▢ Expand</label>
-<label for="expand-toggle-2" class="collapse-indicator">▣ Collapse</label>
+<label for="expand-toggle-2" class="expand-indicator">▢ increase</label>
+<label for="expand-toggle-2" class="collapse-indicator">▣ DECREASE</label>
 <div class="nav-dots">
 <label for="img2-1"></label>
 <label for="img2-2"></label>
@@ -459,7 +463,151 @@ Longitude: 4° 17' 1.38" E
 <label for="img2-4"></label>
 </div>
 </div>
-<div class="caption-overlay">Caption for Collection 2</div>
+<div class="caption-overlay">
+<pre> 
+
+File name: IMG_5276.HEIC
+File type: HEIF image
+File size: 3.3 MB
+
+Created: 25 December 2025, 17:55
+Modified: 25 December 2025, 17:55
+Last opened: 25 December 2025, 17:55
+Content created: 18 November 2025, 11:35
+
+Dimensions: 4032 x 3024
+Resolution: 72 x 72
+Colour space: RGB
+Colour profile: Display P3
+
+Device make: Apple
+Device model: iPhone 13
+
+Aperture value: 2.5261
+F number: f/2.4
+Exposure time: 1/99
+ISO: 64
+Focal length: 1.54 mm
+Flash: No
+
+Exposure program: Normal
+Metering mode: Pattern
+White balance: Auto
+
+Content creator: 18.6.2
+
+Latitude: 52° 3' 44.45" N
+Longitude: 4° 17' 3.69" E
+
+------------------------------------
+
+File name: IMG_5437.HEIC
+File type: HEIF image
+File size: 2.5 MB
+
+Created: 31 December 2025, 18:37
+Modified: 31 December 2025, 18:37
+Last opened: 31 December 2025, 18:39
+Content created: 23 November 2025, 14:30
+
+Dimensions: 4032 x 3024
+Resolution: 72 x 72
+Colour space: RGB
+Colour profile: Display P3
+
+Device make: Apple
+Device model: iPhone 13
+
+Aperture value: 2.5261
+F number: f/2.4
+Exposure time: 1/88
+ISO: 320
+Focal length: 1.54 mm
+Flash: No
+
+Exposure program: Normal
+Metering mode: Pattern
+White balance: Auto
+
+Content creator: 18.6.2
+
+Latitude: 52° 3' 44.35" N
+Longitude: 4° 17' 3.972" E
+
+------------------------------------
+
+File name: IMG_5469.HEIC
+File type: HEIF image
+File size: 2.6 MB
+
+Created: 31 December 2025, 18:37
+Modified: 31 December 2025, 18:37
+Last opened: 31 December 2025, 18:39
+Content created: 24 November 2025, 09:43
+
+Dimensions: 4032 x 3024
+Resolution: 72 x 72
+Colour space: RGB
+Colour profile: Display P3
+
+Device make: Apple
+Device model: iPhone 13
+
+Aperture value: 2.5261
+F number: f/2.4
+Exposure time: 1/99
+ISO: 100
+Focal length: 1.54 mm
+Flash: No
+
+Exposure program: Normal
+Metering mode: Pattern
+White balance: Auto
+
+Content creator: 18.6.2
+
+Latitude: 52° 3' 44.35" N
+Longitude: 4° 17' 4.26" E
+
+------------------------------------
+
+File name: IMG_5565.HEIC
+File type: HEIF image
+File size: 2.9 MB
+
+Created: Wednesday, 31 December 2025, 18:38
+Modified: Wednesday, 31 December 2025, 18:38
+Last opened: Wednesday, 31 December 2025, 18:39
+Content created: 27 November 2025, 12:25
+
+Dimensions: 4032 x 3024
+Resolution: 72 x 72
+Colour space: RGB
+Colour profile: Display P3
+
+Device make: Apple
+Device model: iPhone 13
+
+Aperture value: 2.5261
+F number: f/2.4
+Exposure time: 1/99
+ISO: 200
+Focal length: 1.54 mm
+Flash: No
+
+Exposure program: Normal
+Metering mode: Pattern
+White balance: Auto
+
+Content creator: 18.6.2
+
+Latitude: 52° 3' 44.48" N
+Longitude: 4° 17' 3.96" E
+
+
+
+</pre>  
+</div>
 </div>
 
 <!-- Carousel Collection 3 (2 images) -->
@@ -467,22 +615,103 @@ Longitude: 4° 17' 1.38" E
 <div class="image-container">
 <input type="radio" name="collection3" id="img3-1" checked>
 <div class="image-slide">
-<img src="https://via.placeholder.com/400x300/FF6B6B/FFFFFF?text=Collection+3+Image+1" alt="Collection 3 Image 1">
-<span class="image-counter">1/2</span>
+<img src="assets/images/location_3/L3_2311.jpg" alt="Collection 3 Image 1">
+<span class="image-counter">1/3</span>
 </div>
 <input type="radio" name="collection3" id="img3-2">
 <div class="image-slide">
-<img src="https://via.placeholder.com/400x300/4ECDC4/FFFFFF?text=Collection+3+Image+2" alt="Collection 3 Image 2">
-<span class="image-counter">2/2</span>
+<img src="assets/images/location_3/L3_2511.jpg" alt="Collection 3 Image 2">
+<span class="image-counter">2/3</span>
 </div>
-<label for="expand-toggle-3" class="expand-indicator">▢ Expand</label>
-<label for="expand-toggle-3" class="collapse-indicator">▣ Collapse</label>
+<input type="radio" name="collection3" id="img3-3">
+<div class="image-slide">
+<img src="assets/images/location_3/L3_0212.jpg" alt="Collection 3 Image 3">
+<span class="image-counter">3/3</span>
+</div>
+
+
+<label for="expand-toggle-3" class="expand-indicator">▢ BIG</label>
+<label for="expand-toggle-3" class="collapse-indicator">▣ SMALL</label>
 <div class="nav-dots">
 <label for="img3-1"></label>
 <label for="img3-2"></label>
+<label for="img3-3"></label>
+
 </div>
 </div>
-<div class="caption-overlay">Caption for Collection 3</div>
+<div class="caption-overlay">
+    <pre>
+
+File name: IMG_5444.HEIC
+File type: HEIF image
+File size: 2.5 MB
+
+Created: 31 December 2025, 18:37
+Modified: 31 December 2025, 18:37
+Last opened: 31 December 2025, 18:39
+Content created: 23 November 2025, 14:39
+
+Dimensions: 4032 x 3024
+Resolution: 72 x 72
+Colour space: RGB
+Colour profile: Display P3
+
+Device make: Apple
+Device model: iPhone 13
+
+Aperture value: 2.5261
+F number: f/2.4
+Exposure time: 1/95
+ISO: 320
+Focal length: 1.54 mm
+Flash: No
+
+Exposure program: Normal
+Metering mode: Pattern
+White balance: Auto
+
+Content creator: 18.6.2
+
+Latitude: 52° 3' 47.73" N
+Longitude: 4° 16' 53.64" E
+
+------------------------------------
+
+File name: IMG_5690.HEIC
+File type: HEIF image
+File size: 3.5 MB
+
+Created: 31 December 2025, 18:38
+Modified: 31 December 2025, 18:38
+Last opened: 31 December 2025, 18:39
+Content created: 2 December 2025, 11:10
+
+Dimensions: 4032 x 3024
+Resolution: 72 x 72
+Colour space: RGB
+Colour profile: Display P3
+
+Device make: Apple
+Device model: iPhone 13
+
+Aperture value: 2.5261
+F number: f/2.4
+Exposure time: 1/99
+ISO: 100
+Focal length: 1.54 mm
+Flash: No
+
+Exposure program: Normal
+Metering mode: Pattern
+White balance: Auto
+
+Content creator: 18.6.2
+
+Latitude: 52° 3' 48.01" N
+Longitude: 4° 16' 53.682" E
+</pre>
+
+</div>
 </div>
 
 <!-- Map Item (Expandable) -->
